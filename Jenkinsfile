@@ -30,7 +30,7 @@ pipeline {
 
 				stage('Deploy to Staging') {
 					steps {
-						sh "scp -i /tmp/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_staging}:/var/lib/tomcat/webapps/"
+						sh "scp -i /tmp/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_staging}:/var/lib/tomcat7/webapps"
 					}
 				}
 
@@ -39,7 +39,7 @@ pipeline {
 						timeout(time:5, unit:'DAYS') {
 							input message: 'Approve PRODUCTION Deployment?'
 						}
-						sh "scp -i /tmp/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_production}:/var/lib/tomcat/webapps/"
+						sh "scp -i /tmp/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_production}:/var/lib/tomcat7/webapps"
 					}
 
 					post {
